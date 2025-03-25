@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2692740496010334"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>لعبة كنز الليل - الإصدار المطور</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- شاشة البداية -->
+    <div id="start-screen" class="start-screen">
+<a href="https://www.paypal.me/username" target="_blank">
+    <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="تبرع عبر PayPal">
+</a>
+        <div class="start-content">
+            <h1>🏆 كنز الليل 🏆</h1>
+            <p>العبة الممتعة لجمع الكنوز وتجنب القنابل!</p>
+            
+            <div class="start-buttons">
+                <button id="start-game-btn" class="start-btn">🎮 بدء اللعبة</button>
+                <button id="how-to-play-btn" class="start-btn">📖 كيفية اللعب</button>
+                <button id="settings-btn" class="start-btn">⚙️ الإعدادات</button>
+            </div>
+            
+            <div id="instructions" class="instructions" style="display:none;">
+                <h3>كيفية اللعب:</h3>
+                <ul>
+                    <li>تحكم باللوح الأسفل باستخدام الماوس أو الأسهم على الكيبورد</li>
+                    <li>اجمع الكنوز الذهبية لزيادة نقاطك</li>
+                    <li>تجنب القنابل الحمراء التي تفقدك حياة</li>
+                    <li>الكنوز الخاصة تعطيك نقاط إضافية</li>
+                    <li>القلوب الخضراء تزيد من حياتك</li>
+                </ul>
+                <button id="back-btn" class="start-btn">← العودة</button>
+            </div>
+
+            <div id="start-settings" class="instructions" style="display:none;">
+                <h3>الإعدادات:</h3>
+                <div class="setting-option">
+                    <label for="start-difficulty">مستوى الصعوبة:</label>
+                    <select id="start-difficulty">
+                        <option value="easy">سهل</option>
+                        <option value="medium">متوسط</option>
+                        <option value="hard">صعب</option>
+                    </select>
+                </div>
+                <div class="setting-option">
+                    <label for="start-player-color">لون اللاعب:</label>
+                    <input type="color" id="start-player-color" value="#4facfe">
+                </div>
+                <button id="save-start-settings" class="start-btn">💾 حفظ الإعدادات</button>
+                <button id="back-settings-btn" class="start-btn">← العودة</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- واجهة اللعبة الرئيسية -->
+    <div class="game-wrapper" style="display:none;">
+        <div class="game-header">
+            <h1>🏆 كنز الليل - الإصدار المطور 🏆</h1>
+            <div class="game-info">
+                <div id="score">🌟 النقاط: 0</div>
+                <div id="high-score">✨ أعلى نتيجة: 0</div>
+                <div id="timer">⏱ الوقت: 60</div>
+                <div id="level">📊 المستوى: 1</div>
+                <div id="lives">❤️ الأرواح: 3</div>
+                <div id="streak">🔥 تسلسل: 0</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="start-btn">🎮 بدء اللعبة</button>
+            <button id="pause-btn">⏸ إيقاف مؤقت</button>
+            <button id="sound-btn">🔊 الصوت</button>
+            <button id="shop-btn">🏪 المتجر</button>
+            <button id="restart-btn" style="display:none;">🔄 إعادة تشغيل</button>
+        </div>
+
+        <div id="shop-menu" class="popup-menu" style="display:none;">
+            <h3>🏪 متجر اللعبة</h3>
+            <div class="shop-item" data-item="player-skin1" data-cost="100">
+                <div class="item-preview skin1"></div>
+                <div>مظهر أزرق مميز (100 نقطة)</div>
+            </div>
+            <div class="shop-item" data-item="extra-life" data-cost="200">
+                <div class="item-preview life"></div>
+                <div>حياة إضافية (200 نقطة)</div>
+            </div>
+            <button id="close-shop">إغلاق</button>
+        </div>
+
+        <div id="settings-menu" class="popup-menu" style="display:none;">
+            <h3>الإعدادات</h3>
+            <div class="setting-option">
+                <label for="difficulty">مستوى الصعوبة:</label>
+                <select id="difficulty">
+                    <option value="easy">سهل</option>
+                    <option value="medium">متوسط</option>
+                    <option value="hard">صعب</option>
+                </select>
+            </div>
+            <div class="setting-option">
+                <label for="player-color">لون اللاعب:</label>
+                <input type="color" id="player-color" value="#4facfe">
+            </div>
+            <button id="save-settings">حفظ الإعدادات</button>
+        </div>
+
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+            <div id="progress-label">التقدم نحو المستوى التالي: 0%</div>
+        </div>
+
+        <div id="game-container">
+            <div id="night-sky"></div>
+            <div id="player"></div>
+            <div id="combo-display" style="display:none;"></div>
+        </div>
+
+        <div id="daily-challenge">
+            <h3>🎯 التحدي اليومي</h3>
+            <p>اجمع 20 كنزًا دون فقدان حياة!</p>
+            <div class="challenge-progress">
+                <div class="progress-fill"></div>
+                <span class="progress-text">0/20</span>
+            </div>
+            <div class="reward">المكافأة: 50 نقطة</div>
+        </div>
+
+        <div id="achievements">
+            <h3>🏆 الإنجازات</h3>
+            <div class="achievement" data-id="first-game" data-unlocked="false">
+                <div class="achievement-icon">🔒</div>
+                <div class="achievement-info">
+                    <div class="achievement-title">المبتدئ</div>
+                    <div class="achievement-desc">اكمل لعبتك الأولى</div>
+                </div>
+            </div>
+            <div class="achievement" data-id="treasure-hunter" data-unlocked="false">
+                <div class="achievement-icon">🔒</div>
+                <div class="achievement-info">
+                    <div class="achievement-title">صائد الكنوز</div>
+                    <div class="achievement-desc">اجمع 100 كنز</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الأصوات -->
+    <audio id="treasure-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3"></audio>
+    <audio id="bomb-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-explosion-2759.mp3"></audio>
+    <audio id="special-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
+    <audio id="life-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-extra-life-in-a-game-2060.mp3"></audio>
+    <audio id="levelup-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3"></audio>
+    <audio id="combo-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-coin-win-notification-271.mp3"></audio>
+    <audio id="background-music" loop src="https://assets.mixkit.co/music/preview/mixkit-game-show-suspense-waiting-668.mp3"></audio>
+
+    <script src="script.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
+     data-ad-slot="YYYYYYYYYY"
+     data-ad-format="auto"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</body>
+</html>
