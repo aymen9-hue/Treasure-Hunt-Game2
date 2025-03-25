@@ -1,0 +1,474 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    touch-action: manipulation;
+    font-family: 'Tajawal', sans-serif;
+}
+
+body {
+    text-align: center;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #fff;
+    min-height: 100vh;
+    padding: 10px;
+    overflow-x: hidden;
+}
+
+/* شاشة البداية */
+.start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0f0c29, #302b63);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    font-family: 'Tajawal', sans-serif;
+}
+
+.start-content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.start-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #4facfe;
+}
+
+.start-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #aaa;
+}
+
+.start-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.start-btn {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    width: 100%;
+}
+
+.start-btn:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+.instructions, #start-settings {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.instructions h3, #start-settings h3 {
+    color: #4facfe;
+    margin-bottom: 15px;
+}
+
+.instructions ul {
+    list-style-type: none;
+    margin-bottom: 20px;
+}
+
+.instructions li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* بقية الأنماط كما هي مع تعديلات بسيطة */
+.game-wrapper {
+    max-width: 800px;
+    margin: auto;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+.game-header {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+
+.game-info div {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    min-width: 100px;
+}
+
+button:active {
+    transform: scale(0.95);
+    opacity: 0.8;
+}
+
+#start-btn {
+    background: linear-gradient(to right, #4CAF50, #2E8B57);
+}
+
+#pause-btn {
+    background: linear-gradient(to right, #FF9800, #FF5722);
+}
+
+#restart-btn {
+    background: linear-gradient(to right, #2196F3, #3F51B5);
+}
+
+#sound-btn {
+    background: linear-gradient(to right, #9C27B0, #673AB7);
+}
+
+#shop-btn {
+    background: linear-gradient(to right, #FFC107, #FF9800);
+}
+
+#game-container {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 2px solid #444;
+    margin: 10px 0;
+    touch-action: none;
+}
+
+#night-sky {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #000428, #004e92);
+    z-index: 1;
+}
+
+#player {
+    width: 80px;
+    height: 20px;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 8px;
+    transition: left 0.1s ease;
+    cursor: grab;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(79, 172, 254, 0.7);
+}
+
+#player:active {
+    cursor: grabbing;
+}
+
+.player-skin1 {
+    background: linear-gradient(to right, #ff5e62, #ff9966) !important;
+    box-shadow: 0 0 10px rgba(255, 94, 98, 0.7) !important;
+}
+
+.treasure {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at center, gold, #daa520);
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 10px gold;
+    z-index: 5;
+    animation: fall linear infinite;
+    animation-duration: var(--fall-duration);
+}
+
+.bomb {
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle at center, #ff3333, #8b0000);
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff3333;
+    z-index: 5;
+    animation: fall linear infinite;
+    animation-duration: var(--fall-duration);
+}
+
+.special-treasure {
+    background: radial-gradient(circle at center, #ff00ff, #800080) !important;
+    box-shadow: 0 0 15px #ff00ff !important;
+    animation: fall linear infinite, pulse 1s infinite;
+    animation-duration: var(--fall-duration);
+}
+
+.life-item {
+    background: radial-gradient(circle at center, #00ff00, #008000) !important;
+    box-shadow: 0 0 15px #00ff00 !important;
+    animation: fall linear infinite, float 2s infinite ease-in-out;
+    animation-duration: var(--fall-duration);
+}
+
+.smart-bomb {
+    background: radial-gradient(circle at center, #ff4500, #8b0000) !important;
+    box-shadow: 0 0 15px #ff4500 !important;
+    animation: fall linear infinite, shake 0.5s infinite;
+    animation-duration: var(--fall-duration);
+}
+
+.popup-menu {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px solid #444;
+    position: relative;
+}
+
+.popup-menu h3 {
+    margin-bottom: 15px;
+    color: #4facfe;
+}
+
+.setting-option {
+    margin: 15px 0;
+    text-align: right;
+}
+
+.setting-option label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.setting-option select, .setting-option input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+#progress-container {
+    width: 100%;
+    margin: 10px 0;
+}
+
+#progress-bar {
+    height: 10px;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    border-radius: 5px;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+#progress-label {
+    font-size: 0.8rem;
+    margin-top: 5px;
+    color: #aaa;
+}
+
+.daily-challenge {
+    background-color: rgba(255, 215, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px dashed gold;
+}
+
+.challenge-progress {
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(to right, gold, #daa520);
+    width: 0%;
+    transition: width 0.3s;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    font-weight: bold;
+}
+
+.reward {
+    font-weight: bold;
+    color: gold;
+}
+
+.achievements {
+    margin-top: 20px;
+}
+
+.achievement {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px 0;
+    opacity: 0.6;
+}
+
+.achievement[data-unlocked="true"] {
+    opacity: 1;
+    background-color: rgba(79, 172, 254, 0.2);
+}
+
+.achievement-icon {
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+.achievement-info {
+    text-align: right;
+    flex-grow: 1;
+}
+
+.achievement-title {
+    font-weight: bold;
+}
+
+.achievement-desc {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.shop-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.shop-item:hover {
+    background-color: rgba(79, 172, 254, 0.2);
+}
+
+.item-preview {
+    width: 40px;
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 4px;
+}
+
+.skin1 {
+    background: linear-gradient(to right, #ff5e62, #ff9966);
+}
+
+.life {
+    background: radial-gradient(circle at center, #00ff00, #008000);
+}
+
+#combo-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: gold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+@keyframes fall {
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(100vh - 100px)); }
+}
+
+@keyframes pulse {
+    0% { transform: translateY(var(--current-y)) scale(1); }
+    50% { transform: translateY(var(--current-y)) scale(1.1); }
+    100% { transform: translateY(var(--current-y)) scale(1); }
+}
+
+@keyframes shake {
+    0% { transform: translateY(var(--current-y)) translateX(0); }
+    25% { transform: translateY(var(--current-y)) translateX(-5px); }
+    75% { transform: translateY(var(--current-y)) translateX(5px); }
+    100% { transform: translateY(var(--current-y)) translateX(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(var(--current-y)); }
+    50% { transform: translateY(calc(var(--current-y) - 5px)); }
+    100% { transform: translateY(var(--current-y)); }
+}
+
+@media (min-width: 768px) {
+    #game-container {
+        height: 500px;
+    }
+    
+    #player {
+        width: 90px;
+        height: 25px;
+    }
+    
+    .treasure, .bomb, .special-treasure, .life-item, .smart-bomb {
+        width: 35px;
+        height: 35px;
+    }
+}
